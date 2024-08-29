@@ -1,0 +1,9 @@
+---
+version: 2
+updates:  # yamllint disable-line rule:indentation
+- package-ecosystem: 'terraform'  # yamllint disable-line rule:indentation
+  directory: '/'
+  schedule:
+    interval: 'daily'
+    time: '11:00'
+  open-pull-requests-limit: 10

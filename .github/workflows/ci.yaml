@@ -1,0 +1,69 @@
+---
+name: 'CI'
+on:
+  pull_request:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  terraform-fmt:
+    name: 'terraform-fmt'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Checkout GitHub actions repo'
+        uses: 'actions/checkout@v2'
+        with:
+          repository: 'sharksrus/github-actions'
+          token: '${{ secrets.SHARK_GITHUB_TOKEN }}'
+          path: '.github/actions'
+          ref: 'main'
+      - name: 'running terraform-fmt'
+        uses: './.github/actions/terraform-fmt'
+
+  tflint:
+    name: 'tflint'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Checkout GitHub actions repo'
+        uses: 'actions/checkout@v2'
+        with:
+          repository: 'sharksrus/github-actions'
+          token: '${{ secrets.SHARK_GITHUB_TOKEN }}'
+          path: '.github/actions'
+          ref: 'main'
+      - name: 'running tflint'
+        uses: './.github/actions/tflint'
+
+  tfsec:
+    name: 'tfsec'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Checkout GitHub actions repo'
+        uses: 'actions/checkout@v2'
+        with:
+          repository: 'sharksrus/github-actions'
+          token: '${{ secrets.SHARK_GITHUB_TOKEN }}'
+          path: '.github/actions'
+          ref: 'main'
+      - name: 'running tfsec'
+        uses: './.github/actions/tfsec'
+
+  yamllint:
+    name: 'yamllint'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Checkout GitHub actions repo'
+        uses: 'actions/checkout@v2'
+        with:
+          repository: 'sharksrus/github-actions'
+          token: '${{ secrets.SHARK_GITHUB_TOKEN }}'
+          path: '.github/actions'
+      - name: 'Run yamllint'
+        uses: './.github/actions/yamllint'
